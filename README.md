@@ -10,9 +10,12 @@ When the client wants to send a message to their peer, an HTTP POST request is s
 
 # Prerequisites
 1. <a href="https://nodejs.org">Node.js</a>.
-2. <b>If you're on Windows</b>, make sure that `ssh` is available as a shell command. SSH is a default shell command on Linux and MacOS but you can set it up in your Windows CMD by installing <a href="https://putty.org/">Putty</a> or <a href="https://git-scm.com/downloads">Git Desktop</a>.
-3. A free TCP port (default 3001) that <b>Node.js</b> is allowed to access.
-4. Firewall access given to Node.js and SSH.
+2. A free TCP port (default 3001) that <b>Node.js</b> is allowed to access.
+3. Firewall access given to Node.js and SSH.
+4. <b>If you're on Windows</b>, make sure that `ssh` is available as a shell command. SSH is a default shell command on Linux and MacOS but you can set it up in your Windows CMD by installing third party software like <a href="https://putty.org/">Putty</a> or <a href="https://git-scm.com/downloads">Git Desktop</a>.
+
+# Nodejs dependencies
+As defined under ['dependencies'] in <a href="https://github.com/progyadeep/serverless_p2p_messenger/blob/master/package.json">package.json</a>
 
 # How to run it
 The program has to be started using the `host.js` file. After navigating to the root directory of this program in a terminal, execute:  
