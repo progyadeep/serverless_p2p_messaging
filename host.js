@@ -25,6 +25,10 @@ app.get('/client', (req, res)=>{
 	res.sendFile('client/client.html', {root: __dirname})
 })
 
+app.get('/client.js', (req, res)=>{
+	res.sendFile('client/client.js', {root: __dirname})
+})
+
 app.post('/', (req, res)=>{
 	if(msgHolder == "")
 		msgHolder = req.body.msg
