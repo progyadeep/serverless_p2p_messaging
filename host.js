@@ -22,7 +22,7 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/client', (req, res)=>{
-	res.sendFile('client.html', {root: __dirname})
+	res.sendFile('client/client.html', {root: __dirname})
 })
 
 app.post('/', (req, res)=>{
