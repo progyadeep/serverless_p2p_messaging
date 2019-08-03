@@ -1,0 +1,140 @@
+<html>
+	<head>
+		<title>P2P Messaging</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<style>
+			html, body{
+				margin:0 0 0 0;
+				padding:0 0 0 0;
+			}
+
+			#container{
+				margin:-3 0 0 0;
+				width: calc(700px);
+				position: relative;
+				left:50%;
+				top:50%;
+				height: 99vh;
+				transform: translate(-50%,-50%);
+			}
+
+			#message_area{
+				margin:0 0 0 0;
+				padding:10px 10px 10px 10px;
+				background-color: #eaebed;
+				height: calc(100vh - 75px);
+				color: white;
+				overflow-y: scroll;
+				border: solid 1px #a1a1a1;
+				border-bottom: none;
+			}
+
+			#peer_msg_blob{
+				width:42.5%;
+				background-color:lightgreen;
+				padding:8px 8px 8px 8px;
+				margin-bottom:10px;
+				border-radius:5px;
+			}
+
+			#my_msg_blob{
+				width:42.5%;
+				background-color:lightblue;
+				padding:8px 8px 8px 8px;
+				margin-left: 55%;
+				margin-bottom:10px;
+				border-radius:5px;
+			}
+
+			#type_message{
+				resize: none;
+				margin:0 0 0 0;
+				display:inline-block;
+				border: solid 1px #a1a1a1;
+				width: 100%;
+				height:50px;
+				padding:3px 3px 3px 3px;
+			}
+
+			.line{
+				width:100%;
+				display:block;
+				background-color:black;
+				margin:5px 0 5px 0;
+			}
+
+			@media only screen and (max-width:708px){
+				#container{
+					margin-top:0;
+					position: relative;
+					top:0;
+					left:0;
+					width: calc(100%)!important;
+					transform: none;
+				}
+			}
+		</style>
+	</head>
+	<script>
+		var peerid = prompt('Enter peer id');
+		//var initStateOk = false;
+
+		function jssinit(){
+			setInterval(fetchNewMessage, 500);
+		}
+
+		function fetchNewMessage(){
+			//fetching current messages from comm server @ localhost
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function(){
+				if(req.readyState == 4 && req.status == 200){
+					var t = req.responseText.split("\n");
+					if(t != "" && t != null && t!= undefined){
+						for(var i=0; i<t.length; i++){
+							document.getElementById('message_area').innerHTML += "<div id=\"peer_msg_blob\">"+t[i]+"</div>";
+						}
+					}
+				}
+			}
+			req.open('POST', '/fetch', true);
+			req.send();
+		}
+
+		function sendMessage(){
+			var msg = document.getElementById('type_message').value.trim();
+			document.getElementById('type_message').value = null;
+			if(msg == "")
+				return;
+
+			var m = new XMLHttpRequest();
+			m.onreadystatechange = function(){
+				if(m.readyState == 4){
+					if(m.status == 200){
+						document.getElementById('message_area').innerHTML += "<div id=\"my_msg_blob\">"+msg+"</div>";
+					}
+					else{
+						alert("Failed to send message!");
+					}
+				}
+			}
+			m.open('POST', 'https://'+peerid+'.serveo.net', true);
+			m.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+			m.send("msg="+msg);
+		}
+
+		function checkKey(){
+			if(window.event.keyCode == 13)
+				sendMessage();
+		}
+	</script>
+	<body onload="javascript:jssinit()">
+		<div id="container">
+			<div id="message_area">
+				
+			</div>
+
+			<textarea id="type_message" onkeypress="javascript:checkKey()"></textarea>
+		</div>
+	</body>
+</html>

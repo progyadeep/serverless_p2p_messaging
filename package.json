@@ -1,0 +1,19 @@
+{
+	"name":"serverless_p2p_messaging",
+	"version":"1.0",
+	"license":"MIT",
+	"author":"Progyadeep Moulik",
+	"description":"A secure, serverless, truly peer-to-peer messaging application. Chats are not stored anywhere.",
+	"main":"host.js",
+	"repository":{
+		"type":"git",
+		"url":"https://github.com/progyadeep/serverless_p2p_messaging.git"
+	},
+	"dependencies":{
+		"express":"^4.17.1",
+		"body-parser":"^1.19.0",
+		"child_process":"^1.0.2",
+		"opn":"^6.0.0",
+		"cors":"^2.8.5"
+	}
+}
