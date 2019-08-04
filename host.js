@@ -1,24 +1,26 @@
+//--------------IMPORTING ALL DEPENENCIES--------------------
 const express = require("express")
 const bodyParser = require("body-parser")
 const {spawn} = require("child_process")
 const opn = require('opn')
 const cors = require('cors')
 
+//---------------CONFIGURING EXPRESS SERVER------------------
 var app = express()
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json())
 app.use(cors())
 
-var user = process.argv[2];
+//------------------GLOBAL VARIABLES--------------------
+var port = 3001, msgHolder = "", user = process.argv[2]
 if(user == undefined){
 	console.log("Error: No user ID provided.\nRe-run the command as: node incomingServer.js <user ID>")
 	process.exit(0)
 }
 
-var msgHolder = ""
-
+//-------------ROUTES--------------------
 app.get('/', (req, res)=>{
-	res.send('This server does not support GET requests.')
+	res.send('Get requests are not handled here')
 })
 
 app.get('/client', (req, res)=>{
@@ -42,11 +44,13 @@ app.post('/fetch', (req, res)=>{
 	msgHolder = ""
 })
 
-var port = 3001
-var server = app.listen(port)
+//---------------------STARTING SERVER--------------------------
 console.log('Starting incoming message server...')
+var server = app.listen(port)
 console.log(`Incoming message server started @ 'localhost' on port ${port}`)
 
+
+//-------------------------STARTING SSH TUNNEL SUBPROCESS------------------------
 console.log('Establishing Secure HTTP tunnel...')
 var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', user+':80:localhost:'+port, 'serveo.net'])
 sshTP.unref()
@@ -62,7 +66,9 @@ sshTP.stdout.on('data', function(data){
 	}
 })
 
+//-------------------HANDLING SIGINT SIGNAL-----------------------------
 process.on('SIGINT', function(){
+	//closing SSH tunnel subprocess, server and exiting program
 	sshTP.kill('SIGINT')
 	server.close()
 	process.exit(0)
