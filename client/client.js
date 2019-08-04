@@ -1,7 +1,35 @@
-var peerid = prompt('Enter peer id');
-//var initStateOk = false;
+var peerid = "", initStateOK = false;
+
+while(!initStateOK){
+	while(peerid == "" || peerid == null)
+		peerid = prompt("Enter peer ID");
+
+	//validating peer id
+	var req = new XMLHttpRequest();
+	req.onreadystatechange = function(){
+		if(req.readyState == 4){
+			if(req.status == 200){
+				initStateOK = true;
+			}
+			else{
+				alert('An error unknown error occurred. Try again');
+				peerid = "";
+			}
+		}
+	}
+	req.open('GET', 'https://'+peerid+'.serveo.net', false); //NOT ASYNCHRONOUS
+	try{
+		req.send();
+	}catch(e){ //looking for 502 in case peer server isn't active
+		if(e.toString().startsWith("NetworkError")){
+			alert('Peer Offline or Invalid Peer ID. Try Again');
+			peerid = "";
+		}
+	}
+}
 
 function jssinit(){
+	//starting async process of polling for messages
 	setInterval(fetchNewMessage, 500);
 }
 
@@ -28,6 +56,7 @@ function sendMessage(){
 	if(msg == "")
 		return;
 
+	//sending post request to peer's server with msg as data
 	var m = new XMLHttpRequest();
 	m.onreadystatechange = function(){
 		if(m.readyState == 4){
@@ -45,6 +74,7 @@ function sendMessage(){
 }
 
 function checkKey(){
+	//checking if 'Enter' key is pressed inside message textarea
 	if(window.event.keyCode == 13)
 		sendMessage();
 }
