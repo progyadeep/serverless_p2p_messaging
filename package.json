@@ -1,5 +1,5 @@
 {
-	"name":"serverless_p2p_messaging",
+	"name":"serverless_p2p_messenger",
 	"version":"1.0",
 	"license":"MIT",
 	"author":"Progyadeep Moulik",
@@ -7,7 +7,7 @@
 	"main":"host.js",
 	"repository":{
 		"type":"git",
-		"url":"https://github.com/progyadeep/serverless_p2p_messaging.git"
+		"url":"https://github.com/progyadeep/serverless_p2p_messenger.git"
 	},
 	"dependencies":{
 		"express":"^4.17.1",
