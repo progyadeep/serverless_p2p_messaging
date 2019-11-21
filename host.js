@@ -14,7 +14,7 @@ app.use(cors())
 //------------------GLOBAL VARIABLES--------------------
 var port = 3001, msgHolder = "", user = process.argv[2]
 if(user == undefined){
-	console.log("Error: No user ID provided.\nRe-run the command as: node incomingServer.js <user ID>")
+	console.log("Error: No user ID provided.\nRe-run the command as: node host.js <user ID>")
 	process.exit(0)
 }
 
