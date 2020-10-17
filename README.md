@@ -1,5 +1,5 @@
-# Serverless P2P Messenger
-A secure, serverless, truly peer-to-peer messaging application that doesn't store your chats.
+# Tunneled P2P Messenger
+A secure, in-browser messaging application that facilitataes communication via an SSH tunneling service and doesn't store your chats.
 
 # How this works
 Both participants need to run this program on their computers.<br/><br/>
@@ -26,4 +26,4 @@ where `<user_id>` is going to be the ID your peer will need to use to connect wi
 The webpage will ask for a peer ID, which is the user ID your peer entered while starting their node server. How you'll share your Peer IDs is up to you to decide. After entering the Peer ID, you'll see a chat page and you can start exchanging text messages.
 
 # Downtime issues
-Since the working of this program relies on an external application - serveo - for the SSH tunnel (unless you're on the same local network as your peer in which case the tunnelling won't be absolutely necessary (you need to modify the code accordingly)), issues in the tunnelling app's server will cause this program to malfunction as well.
+Since the working of this program relies on an external application - like serveo - for the SSH tunnel, issues in the tunnelling app's server will cause this program to malfunction as well.
