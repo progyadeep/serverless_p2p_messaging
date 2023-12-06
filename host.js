@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 //------------------GLOBAL VARIABLES--------------------
-var msgHolder = "";
+var port=3001, msgHolder = "";
 
 
 //-------------ROUTES--------------------
@@ -49,7 +49,7 @@ console.log(`Incoming message server started @ 'localhost' on port ${port}`)
 
 //-------------------------STARTING SSH TUNNEL SUBPROCESS------------------------
 console.log('Establishing Secure HTTP tunnel...')
-var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', 'my_url_x777:80:localhost:3001', 'serveo.net'])
+var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', 'my_url_x777:80:localhost:'+port, 'serveo.net'])
 sshTP.unref()
 var sshTPStarted = false
 sshTP.stdout.on('data', function(data){
