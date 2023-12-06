@@ -12,11 +12,8 @@ app.use(bodyParser.json())
 app.use(cors())
 
 //------------------GLOBAL VARIABLES--------------------
-var port = 3001, msgHolder = "", user = process.argv[2]
-if(user == undefined){
-	console.log("Error: No user ID provided.\nRe-run the command as: node host.js <user ID>")
-	process.exit(0)
-}
+var msgHolder = "";
+
 
 //-------------ROUTES--------------------
 app.get('/', (req, res)=>{
@@ -52,7 +49,7 @@ console.log(`Incoming message server started @ 'localhost' on port ${port}`)
 
 //-------------------------STARTING SSH TUNNEL SUBPROCESS------------------------
 console.log('Establishing Secure HTTP tunnel...')
-var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', user+':80:localhost:'+port, 'serveo.net'])
+var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', 'my_url_x777:80:localhost:3001', 'serveo.net'])
 sshTP.unref()
 var sshTPStarted = false
 sshTP.stdout.on('data', function(data){
