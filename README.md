@@ -15,15 +15,18 @@ When the client wants to send a message to their peer, an HTTP POST request is s
 4. <b>If you're on Windows</b>, make sure that `ssh` is available as a shell command. SSH is a default shell command on Linux and MacOS but you can set it up in your Windows CMD by installing third party software like <a href="https://putty.org/">Putty</a> or <a href="https://git-scm.com/downloads">Git Desktop</a>.
 
 # Nodejs dependencies
-As defined under ['dependencies'] in <a href="https://github.com/progyadeep/serverless_p2p_messenger/blob/master/package.json">package.json</a>
+As defined under ['dependencies'] in <a href="https://github.com/progyadeep/tunneled_p2p_messenger/blob/master/package.json">package.json</a>
 
 # How to run it
-The program has to be started using the `host.js` file. After navigating to the root directory of this program in a terminal, execute:  
+Start the program by executing the `host.js` file. After navigating to the root directory of this program in the command line, execute:  
 
-    node host.js <user_id>
+    node host.js
     
-where `<user_id>` is going to be the ID your peer will need to use to connect with you. This will start the local server and set up the SSH tunnel (ssh tunnel will be set up as a subprocess). When these steps are completed, the program will automatically open the web client.<br/><br/>
-The webpage will ask for a peer ID, which is the user ID your peer entered while starting their node server. How you'll share your Peer IDs is up to you to decide. After entering the Peer ID, you'll see a chat page and you can start exchanging text messages.
+This will start the local server and set up the SSH tunnel (ssh tunnel will be set up as a subprocess). When these steps are completed, the program will automatically open the web client.<br/><br/>
+
+The webpage will ask for a peer ID, which is the user address of your peer. After entering the Peer ID, you'll see a chat page and you can start exchanging text messages.
+
+The user address is basically the URL that your local server is publicly accessible through. When you start the SSH tunnel using serveo or localhost.run you'll see that URL returned in the terminal. To have a consistent address for your peers, you can use a domain or subdomain that points to the current tunneled URL of your server (you'll have to update the DNS records of your domain every time you start the tunnel because that URL is randomly generated every time).
 
 # Downtime issues
 Since the working of this program relies on an external application - like serveo - for the SSH tunnel, issues in the tunnelling app's server will cause this program to malfunction as well.
