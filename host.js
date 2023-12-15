@@ -49,10 +49,11 @@ console.log(`Incoming message server started @ 'localhost' on port ${port}`)
 
 //-------------------------STARTING SSH TUNNEL SUBPROCESS------------------------
 console.log('Establishing Secure HTTP tunnel...')
-var sshTP = spawn('ssh', ['-o', 'ServerAliveInterval=60', '-R', 'my_url_x777:80:localhost:'+port, 'serveo.net'])
+var sshTP = spawn('ssh', ['-R', '80:localhost:'+port, 'nokey@localhost.run'])
 sshTP.unref()
 var sshTPStarted = false
 sshTP.stdout.on('data', function(data){
+	console.log(data.toString())
 	if(!sshTPStarted){
 		sshTPStarted = true
 		console.log('Established HTTP(s) tunnel to incoming message server')
