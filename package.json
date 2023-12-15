@@ -1,6 +1,6 @@
 {
 	"name":"tunneled_p2p_messenger",
-	"version":"1.0",
+	"version":"1.1.0",
 	"license":"MIT",
 	"author":"Progyadeep Moulik",
 	"description":"A secure, in-browser messaging application that facilitataes communication via an SSH tunneling service and doesn't store your chats.",
