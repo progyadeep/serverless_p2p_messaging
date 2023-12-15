@@ -17,7 +17,7 @@ while(!initStateOK){
 			}
 		}
 	}
-	req.open('GET', 'https://'+peerid+'.serveo.net', false); //NOT ASYNCHRONOUS
+	req.open('GET', 'https://'+peerid, false); //NOT ASYNCHRONOUS
 	try{
 		req.send();
 	}catch(e){ //looking for 502 in case peer server isn't active
@@ -68,7 +68,7 @@ function sendMessage(){
 			}
 		}
 	}
-	m.open('POST', 'https://'+peerid+'.serveo.net', true);
+	m.open('POST', 'https://'+peerid, true);
 	m.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	m.send("msg="+msg);
 }
